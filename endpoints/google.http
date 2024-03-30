@@ -1,0 +1,71 @@
+### LOGIN GOOGLE
+GET http://localhost:8080/api/v1/oauth2/login
+
+### INDEX CALENDARS
+GET http://localhost:8080/api/v1/calendars
+Google: {{googleToken}}
+
+### GET CALENDAR
+GET http://localhost:8080/api/v1/calendars/{{calendarId}}
+Google: {{googleToken}}
+
+### CREATE CALENDAR
+POST http://localhost:8080/api/v1/calendars?summary=TEST-CALENDAR-INSERT
+Google: {{googleToken}}
+
+### CREATE EVENT
+POST http://localhost:8080/api/v1/calendars/{{calendarId}}/events
+Google: {{googleToken}}
+Content-Type: application/json
+
+{
+  "summary": "Title - Test-event-insert",
+  "description": "Description",
+  "location": "Hotel Danieli, Venice",
+  "start": {
+    "dateTime": "2024-03-29T10:00:00",
+    "timeZone": "Europe/Rome"
+  },
+  "end": {
+    "dateTime": "2024-03-29T20:00:00",
+    "timeZone": "Europe/Rome"
+  },
+  "reminders": {
+    "useDefault": false,
+    "overrides": [
+      {
+        "method": "email",
+        "minutes": 4320
+      },
+      {
+        "method": "email",
+        "minutes": 1440
+      }
+    ]
+  }
+}
+
+### INDEX EVENTS
+GET http://localhost:8080/api/v1/calendars/{{calendarId}}/events
+Google: {{googleToken}}
+
+### GET EVENT
+GET http://localhost:8080/api/v1/calendars/{{calendarId}}/events/{{eventId}}
+Google: {{googleToken}}
+
+### UPDATE EVENT
+PUT http://localhost:8080/api/v1/calendars/{{calendarId}}/events/{{eventId}}
+Google: {{googleToken}}
+Content-Type: application/json
+
+{
+  "summary": "Title - Test event update"
+}
+
+### DELETE EVENT
+DELETE http://localhost:8080/api/v1/calendars/{{calendarId}}/events/{{eventId}}
+Google: {{googleToken}}
+
+### TOKEN INFO
+GET http://localhost:8080/api/v1/oauth2/tokeninfo?
+    access_token={{googleToken}}
